@@ -1,5 +1,4 @@
-import 'package:event_booking_app/pages/home_page.dart';
-import 'package:event_booking_app/pages/signup.dart';
+import 'package:event_booking_app/pages/bottom_nav.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +35,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Home(),
+      home: BottomNav()
     );
   }
 }
