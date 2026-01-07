@@ -36,8 +36,8 @@ class _BottomNavState extends State<BottomNav> {
             currtab = index;
           });
         } ,
-        backgroundColor: Colors.white,
-        color: Colors.black,
+        backgroundColor: Color.fromARGB(255, 87, 219, 255),
+        color: const Color.fromARGB(255, 23, 20, 97),
         animationDuration: Duration(milliseconds: 500),
         items: [
           Icon(Icons.home_outlined, color: Colors.white,size: 25.0,),

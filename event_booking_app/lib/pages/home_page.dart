@@ -12,13 +12,14 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(top: 50.0, left: 15.0, right: 15.0),
+        padding: EdgeInsets.only(top: 25.0, left: 15.0, right: 15.0),
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 230, 240, 255),
-              Color.fromARGB(255, 245, 248, 255),
+              
+              Color.fromARGB(255, 87, 219, 255),
+              Color.fromARGB(255, 87, 219, 255),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -32,7 +33,7 @@ class _HomeState extends State<Home> {
                 Row(
                   children: [
                     Icon(Icons.location_on_outlined,
-                        color: Color.fromARGB(255, 25, 105, 255)),
+                        color: Colors.black),
                     Text(
                       "Lahore, Punjab Pakistan",
                       style: TextStyle(
@@ -43,11 +44,11 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: 15.0),
                 Text(
                   "Hello, Ahmad",
                   style: TextStyle(
-                    fontSize: 23.0,
+                    fontSize: 26.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
@@ -56,27 +57,30 @@ class _HomeState extends State<Home> {
                 Text(
                   "There are 20 Events\naround your location.",
                   style: TextStyle(
-                    fontSize: 23.0,
+                    fontSize: 22.0,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 25, 105, 255),
+                    color: Color.fromARGB(255, 2, 71, 201),
                   ),
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: 15.0),
                 Container(
                   padding: EdgeInsets.only(left: 10.0, top: 5.0),
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: const Color.fromARGB(255, 23, 20, 97),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: TextField(
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       suffixIcon: Icon(
                         Icons.search_outlined,
-                        color: Color.fromARGB(255, 25, 105, 255),
+                        color: Colors.white,
                       ),
                       border: InputBorder.none,
                       hintText: "Search for events",
+                      hintStyle: TextStyle(
+                        color: Colors.white,                      ),
                     ),
                   ),
                 ),
@@ -112,7 +116,7 @@ class _HomeState extends State<Home> {
                       "See all",
                       style: TextStyle(
                         fontSize: 18.0,
-                        color: Color.fromARGB(255, 25, 105, 255),
+                        color: Color.fromARGB(255, 0, 0, 0),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -120,7 +124,7 @@ class _HomeState extends State<Home> {
                 ),
                 SizedBox(height: 20.0),
                 eventCard(),
-                SizedBox(height: 20.0),
+                SizedBox(height: 15.0),
                 eventCard(),
               ],
             ),
@@ -130,14 +134,13 @@ class _HomeState extends State<Home> {
     );
   }
 
-  /// CATEGORY TILE (only colors styled)
   Widget categoryTile(String image, String title) {
     return Material(
       elevation: 3.0,
       borderRadius: BorderRadius.circular(10.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color.fromARGB(255, 23, 20, 97),
           borderRadius: BorderRadius.circular(10.0),
         ),
         padding: EdgeInsets.all(5.0),
@@ -145,12 +148,13 @@ class _HomeState extends State<Home> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(image, height: 30.0, width: 30.0),
+            Image.asset(image, height: 30.0, width: 30.0, color: Colors.white),
             Text(
               title,
               style: TextStyle(
-                fontSize: 18.0,
-                color: Colors.black,
+                fontSize: 17.0,
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ],
@@ -159,7 +163,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-  /// EVENT CARD (only colors styled)
   Widget eventCard() {
     return Column(
       children: [
@@ -180,7 +183,7 @@ class _HomeState extends State<Home> {
                 width: 50.0,
                 margin: EdgeInsets.only(left: 10.0, top: 10.0),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: const Color.fromARGB(255, 23, 20, 97),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Center(
@@ -189,7 +192,7 @@ class _HomeState extends State<Home> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 18.0,
-                      color: Color.fromARGB(255, 25, 105, 255),
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -198,7 +201,7 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-        SizedBox(height: 10.0),
+        SizedBox(height: 8.0),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -214,7 +217,7 @@ class _HomeState extends State<Home> {
               "Rs.2500",
               style: TextStyle(
                 fontSize: 18.0,
-                color: Color.fromARGB(255, 25, 105, 255),
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),

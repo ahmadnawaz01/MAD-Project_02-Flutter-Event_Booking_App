@@ -1,3 +1,4 @@
+import 'package:event_booking_app/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -12,55 +13,67 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Image.asset("images/onboarding.jpg"),
-            SizedBox(height: 20.0),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               "Unlock the Future of",
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 29.0,
+                fontSize: 29,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Text(
+            const Text(
               "Event Booking App",
               style: TextStyle(
-                color: Color(0xff6351ec),
-                fontSize: 30.0,
+                color: Color.fromARGB(255, 51, 45, 238),
+                fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 20.0),
-            Text(
-              "Discover, book, and experience unforgettable moments effortlessly!",
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.black45, fontSize: 17.0),
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                "Discover, book, and experience unforgettable moments effortlessly!",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.black45, fontSize: 17),
+              ),
             ),
-            SizedBox(height: 50.0,),
-            Container(
-              margin: EdgeInsets.only(left: 30.0,right: 30.0),
-              height: 60,
-              decoration: BoxDecoration(color: Color(0xff6351ec),borderRadius: BorderRadius.circular(40.0)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "images/google.png",
-                    height: 30,
-                    width: 30,
-                    fit: BoxFit.cover,
-                  ),
-                SizedBox(width: 10.0,),
-                  Text(
-                    "Sign With Google",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white, fontSize: 17.0,
-                    fontWeight: FontWeight.bold),
-                  ),
-                ],
+            const SizedBox(height: 50),
+            GestureDetector(
+              onTap: () {
+                AuthMethods().signInWithGoogle(context);
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 30),
+                height: 60,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 33, 81, 255),
+                  borderRadius: BorderRadius.circular(40),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      "images/google.png",
+                      height: 30,
+                      width: 30,
+                    ),
+                    const SizedBox(width: 10),
+                    const Text(
+                      "Sign With Google",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
