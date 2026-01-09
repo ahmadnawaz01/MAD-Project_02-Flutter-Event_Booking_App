@@ -1,10 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseMethods {
-  Future addUserDetail(Map<String, dynamic> userinfomap,String id) async {
-   return await FirebaseFirestore.instance
+  Future addUserDetail(Map<String, dynamic> userinfomap, String id) async {
+    return await FirebaseFirestore.instance
         .collection("users")
         .doc(id)
-        .set(userinfomap); 
-    }
+        .set(userinfomap);
   }
+  Future addeventdetails(Map<String, dynamic> eventinfo, String id) async {
+  return await FirebaseFirestore.instance
+      .collection("Event")
+      .doc(id)
+      .set(eventinfo);
+}
+}
+
+

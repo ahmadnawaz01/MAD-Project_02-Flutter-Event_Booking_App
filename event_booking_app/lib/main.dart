@@ -1,5 +1,6 @@
 
-import 'package:event_booking_app/admin/upload_event.dart';
+
+import 'package:event_booking_app/pages/bottom_nav.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: UploadEvent()
+      home: BottomNav()
     );
   }
 }
