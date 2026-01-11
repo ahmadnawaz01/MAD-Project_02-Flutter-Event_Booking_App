@@ -1,5 +1,6 @@
 import 'package:event_booking_app/pages/bottom_nav.dart';
 import 'package:event_booking_app/services/database.dart';
+import 'package:event_booking_app/services/sharedpreferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -35,6 +36,14 @@ class AuthMethods {
 
     final User? user = result.user;
     if (user == null) return;
+     await SharedpreferenceHelper()
+      .saveUserEmail(user.email!);
+  await SharedpreferenceHelper()
+      .saveUserName(user.displayName!);
+  await SharedpreferenceHelper()
+      .saveUserImage(user.photoURL!);
+  await SharedpreferenceHelper()
+      .saveUserId(user.uid);
 
     final Map<String, dynamic> userInfoMap = {
       "name": user.displayName,

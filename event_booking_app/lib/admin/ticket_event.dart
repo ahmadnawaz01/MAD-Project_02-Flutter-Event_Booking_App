@@ -1,56 +1,50 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_booking_app/services/database.dart';
-import 'package:event_booking_app/services/sharedpreferences.dart';
 import 'package:flutter/material.dart';
 
-class Booking extends StatefulWidget {
-  const Booking({super.key});
+class TicketEvent extends StatefulWidget {
+  const TicketEvent({super.key});
 
   @override
-  State<Booking> createState() => _BookingState();
+  State<TicketEvent> createState() => _TicketEventState();
 }
 
-class _BookingState extends State<Booking> {
-  Stream<QuerySnapshot>? bookingstream;
-  String? id;
+class _TicketEventState extends State<TicketEvent> {
+  Stream<QuerySnapshot>? ticketsStream;
 
   @override
   void initState() {
     super.initState();
-    _loadBookings();
+    _loadTickets();
   }
 
-  Future<void> _loadBookings() async {
-    id = await SharedpreferenceHelper().getUserId();
-    if (id != null) {
-      bookingstream = await DatabaseMethods().getbookings(id!);
-      setState(() {}); 
-    }
+  Future<void> _loadTickets() async {
+    ticketsStream = await DatabaseMethods().getTickets("All");
+    setState(() {});
   }
 
-  Widget allbooking() {
-    if (bookingstream == null) {
-      
+  Widget allTickets() {
+    if (ticketsStream == null) {
       return const Center(child: CircularProgressIndicator());
     }
 
     return StreamBuilder<QuerySnapshot>(
-      stream: bookingstream,
+      stream: ticketsStream,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return const Center(child: Text("Error loading bookings"));
+          return const Center(child: Text("Error loading tickets"));
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return const Center(child: Text("No bookings found"));
+          return const Center(child: Text("No tickets found"));
         }
 
         final docs = snapshot.data!.docs;
 
         return ListView.builder(
-          key: const PageStorageKey("events_list"),
+          key: const PageStorageKey("tickets_list"),
           padding: EdgeInsets.zero,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -60,14 +54,14 @@ class _BookingState extends State<Booking> {
 
             return Container(
               width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.only(bottom: 5),
+              margin: const EdgeInsets.only(bottom: 5),
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 23, 20, 97),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30.0),
                   topRight: Radius.circular(30.0),
                   bottomLeft: Radius.circular(30.0),
-                  bottomRight: Radius.circular(30.0)
+                  bottomRight: Radius.circular(30.0),
                 ),
               ),
               child: Column(
@@ -76,9 +70,10 @@ class _BookingState extends State<Booking> {
 
                 
                   Container(
-                    margin:
-                        const EdgeInsets.only(left: 10.0, right: 10.0),
-                    decoration: const BoxDecoration(color:Color.fromARGB(255, 23, 20, 97)),
+                    margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 23, 20, 97),
+                    ),
                     child: Column(
                       children: [
                         Row(
@@ -99,12 +94,12 @@ class _BookingState extends State<Booking> {
                             ),
                           ],
                         ),
-                        const Divider(),
+                        const Divider(color: Colors.white70),
                       ],
                     ),
                   ),
 
-                
+                  
                   Container(
                     margin: const EdgeInsets.only(
                       left: 10.0,
@@ -133,8 +128,8 @@ class _BookingState extends State<Booking> {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(20.0),
-                          child: Image.asset(
-                            "images/party.jpg",
+                          child: Image.network(
+                            ds["Image"],
                             height: 120,
                             width: 120,
                             fit: BoxFit.cover,
@@ -166,6 +161,25 @@ class _BookingState extends State<Booking> {
                                     color: Colors.black,
                                     fontSize: 19.0,
                                     fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 5.0),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.person_2_outlined,
+                                  color: Colors.blue,
+                                  size: 25.0,
+                                ),
+                                const SizedBox(width: 10.0),
+                                Text(
+                                  ds["Name"],
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ],
@@ -210,7 +224,6 @@ class _BookingState extends State<Booking> {
                 ],
               ),
             );
-            
           },
         );
       },
@@ -221,7 +234,8 @@ class _BookingState extends State<Booking> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.only(top: 10.0, left: 10.0,right: 10.0),
+        padding:
+            const EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0,bottom: 5.0),
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -231,23 +245,38 @@ class _BookingState extends State<Booking> {
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-          )),
+          ),
+        ),
         child: ListView(
           children: [
-            Center(
-              child: const Text(
-                "Bookings",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
+            Container(
+                  padding: EdgeInsets.only(top: 10.0),
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(
+                          Icons.arrow_back_ios_new_outlined,
+                          color: Colors.black,
+                        ),
+                      ),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.15),
+                      Text(
+                        "Events Tickets",
+                        style: TextStyle(
+                          fontSize: 26.0,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 30, 27, 130),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ),
-            SizedBox(height: 10.0),
-          allbooking(),
-SizedBox(height: 20.0),
-            
+            const SizedBox(height: 10.0),
+            allTickets(),
+            const SizedBox(height: 20.0),
           ],
         ),
       ),

@@ -17,6 +17,7 @@ class _UploadEventState extends State<UploadEvent> {
   TextEditingController namecon = TextEditingController();
   TextEditingController pricecon = TextEditingController();
   TextEditingController detailscon = TextEditingController();
+  TextEditingController locationcon = TextEditingController();
   final List<String> eventcategories = [
     "Music",
     "Food",
@@ -80,10 +81,10 @@ class _UploadEventState extends State<UploadEvent> {
       body: Container(
         padding: EdgeInsets.only(left: 15.0, right: 15.0),
         width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
+       decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 87, 219, 255),
+              Color.fromARGB(255, 235, 246, 249),
               Color.fromARGB(255, 87, 219, 255),
             ],
             begin: Alignment.topLeft,
@@ -213,6 +214,33 @@ class _UploadEventState extends State<UploadEvent> {
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Enter Price",
+                      hintStyle: TextStyle(color: Colors.white70),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15.0),
+                Text(
+                  "Event Location",
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 10.0),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 30.0),
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 23, 20, 97),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: TextField(
+                    controller: locationcon,
+                    style: TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "Enter Location",
                       hintStyle: TextStyle(color: Colors.white70),
                     ),
                   ),
@@ -373,7 +401,8 @@ class _UploadEventState extends State<UploadEvent> {
                         "Category": value,
                         "Detail": detailscon.text,
                         "Date":DateFormat('yyyy-MM-dd').format(Selectdate),
-                        "Time":formattimeofday(Selectedtime)
+                        "Time":formattimeofday(Selectedtime),
+                        "Location":locationcon.text
                       };
                       try {
                         await DatabaseMethods()
