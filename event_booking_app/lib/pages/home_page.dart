@@ -209,13 +209,13 @@ class _HomeState extends State<Home> {
                 ),
                 const SizedBox(height: 15.0),
                 Container(
-                  padding: const EdgeInsets.only(left: 10.0, top: 5.0),
+                  padding: EdgeInsets.only(left: 10.0, top: 5.0),
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 23, 20, 97),
+                    color: Color.fromARGB(255, 23, 20, 97),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: const TextField(
+                  child: TextField(
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       suffixIcon: Icon(
@@ -302,6 +302,7 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
+
     );
   }
 }

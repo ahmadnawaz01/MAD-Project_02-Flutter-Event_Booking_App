@@ -59,7 +59,7 @@ class AuthMethods {
         margin: EdgeInsets.only(bottom: 20),
         backgroundColor: const Color.fromARGB(255, 17, 16, 65),
         content: Text(
-          "Registered Successfully!/n",
+          "Registered Successfully!",
           style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
@@ -73,7 +73,7 @@ await Future.delayed(const Duration(milliseconds: 800));
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => const BottomNav()),
+      MaterialPageRoute(builder: (_) => BottomNav()),
     );
   } catch (e) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -84,5 +84,13 @@ await Future.delayed(const Duration(milliseconds: 800));
     );
   }
 }
+ Future<void> SignOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
+  Future<void> deleteuser() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    await user?.delete();
+  }
 
 }
