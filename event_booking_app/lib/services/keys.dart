@@ -1,2 +1,2 @@
-String publishkey="pk_test_51SoJmy7kj1lVxdWSfwPPVOAyGux0BaRpVQtvpnhEP1gIv7E1qmmChcU2Ws8sGAUxpSwDK82l6JP0OfcA4UGQHGG7004X7z03OP";
-String secretkey="sk_zw1vKniyD5f0SuCmN2LmIrXp9bTvAq4JGdGBnvoniAX6SFhhP7EzRsCjld8xdjDZuH00sMpNE5Pl";
+String publishkey="pk_testDK82l6JP0OfcA4UGQHGG7004X7z03OP";
+String secretkey="sk_zw1vKniyD5f0SuCmN2LmIrXp9bTvAquH00sMpNE5Pl";
